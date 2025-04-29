@@ -56,28 +56,19 @@ class Sheep {
   draw() {
     ellipse(this.x, this.y, 1, 1);
 
-    // if angle is between 0 and PI --> left
-    // if this.isResting, img is resting_left
-    // else img is walking_left
+    let facingLeft = cos(this.angle) < 0;
 
-    // else --> right
-    // if this.isResting, img is resting_right
-    // else img is walking_right
-
-
-    let facingLeft = this.angle >=0 && this.angle < PI;
-
-    if(facingLeft){
-      if(this.isResting){
-        image(sheep_left, this.x -25, this.y -25)
-      }else{
-        image(sheep_left_walk, this.x -25, this.y -25)
+    if (facingLeft) {
+      if (this.isResting) {
+        image(sheep_left, this.x - 25, this.y - 25);
+      } else {
+        image(sheep_left_walk, this.x - 25, this.y - 25);
       }
-    }else{
-      if(this.isResting){
-        image(sheep_right, this.x -25, this.y -25);
-      }else{
-        image(sheep_right_walk, this.x -25, this.y-25);
+    } else {
+      if (this.isResting) {
+        image(sheep_right, this.x - 25, this.y - 25);
+      } else {
+        image(sheep_right_walk, this.x - 25, this.y - 25);
       }
     }
   }
@@ -93,4 +84,3 @@ class Sheep {
     this.angle = (this.angle + PI) % TWO_PI;
   }
 }
-
