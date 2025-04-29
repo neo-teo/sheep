@@ -25,7 +25,9 @@ class Flower {
       ],
     ];
 
-    this.growthTimer = 0;
+    this.timer = 0;
+
+    this.isDecaying = false;
 
     this.c = random([
       { inner: 'white', outer: 'red' },
@@ -38,6 +40,11 @@ class Flower {
   }
 
   update() {
+    if (this.isDecaying && !this.isDecayed()) {
+      this.decay();
+      return;
+    }
+
     if (this.isGrown()) {
       return;
     }
@@ -50,15 +57,27 @@ class Flower {
   }
 
   grow() {
-    this.growthTimer++;
-    if (this.growthTimer > 50) {
-      if (this.h < this.maxH) {
-        this.h++;
-      } else {
-        this.petalStage++;
-      }
-      this.growthTimer = 0;
+    this.timer++;
+    if (this.timer > 50) {
+      this.h < this.maxH ? this.h++ : this.petalStage++;
+      this.timer = 0;
     }
+  }
+
+  startDecay() {
+    this.isDecaying = true;
+  }
+
+  decay() {
+    this.timer++;
+    if (this.timer > 50) {
+      this.petalStage > -1 ? this.petalStage-- : this.h--;
+      this.timer = 0;
+    }
+  }
+
+  isDecayed() {
+    return this.isDecaying && this.h <= 0 && this.petalStage === -1;
   }
 
   draw() {
