@@ -93,3 +93,4 @@ class Sheep {
     this.angle = (this.angle + PI) % TWO_PI;
   }
 }
+

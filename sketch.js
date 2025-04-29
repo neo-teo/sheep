@@ -12,7 +12,9 @@ function setup() {
 
   sheep = new Sheep(width / 2, height / 2);
 
-  flowers.push(new Flower(width / 2, height / 3));
+  for (let i = 0; i < 10; i++) {
+    flowers.push(new Flower(random(width), random(height)));
+  }
 
   for (let i = 0; i < 10; i++) {
     bushes.push({ x: random(width), y: random(height) });
@@ -39,3 +41,4 @@ function draw() {
     pop();
   }
 }
+
