@@ -1,4 +1,4 @@
-let sheep;
+let sheep = [];
 let flowers = [];
 let bushes = [];
 
@@ -12,9 +12,12 @@ function setup() {
   textFont('Courier New');
   text;
 
-  sheep = new Sheep(width / 2, height / 2);
+  sheep.push(new Sheep(width / 2, height / 2));
+  for (let i = 0; i < 3; i++) {
+    sheep.push(new Sheep(random(width), random(height)));
+  }
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 20; i++) {
     flowers.push(new Flower(random(width), random(height)));
   }
 
@@ -24,22 +27,24 @@ function setup() {
 }
 
 function draw() {
-  sheep.update();
+  for (let s of sheep) {
+    s.update();
 
-  for (let i = flowers.length - 1; i >= 0; i--) {
-    let f = flowers[i];
+    for (let i = flowers.length - 1; i >= 0; i--) {
+      let f = flowers[i];
 
-    if (dist(sheep.x, sheep.y, f.x, f.y) < 35) {
-      sheep.startRest();
-      f.startDecay();
+      if (dist(s.x, s.y, f.x, f.y) < 35) {
+        s.startRest();
+        f.startDecay();
+      }
+
+      if (f.isDecayed()) {
+        flowers.splice(i, 1); // safely remove
+        continue; // skip f.update() for this one since it's gone
+      }
+
+      f.update();
     }
-
-    if (f.isDecayed()) {
-      flowers.splice(i, 1); // safely remove
-      continue; // skip f.update() for this one since it's gone
-    }
-
-    f.update();
   }
 
   timer++;
@@ -58,7 +63,10 @@ function draw() {
     pop();
   }
 
-  sheep.draw();
+  for (let s of sheep) {
+    s.draw();
+  }
+
   for (let f of flowers) {
     f.draw();
   }

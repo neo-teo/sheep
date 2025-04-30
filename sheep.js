@@ -38,14 +38,14 @@ class Sheep {
     this.y += this.velocity * Math.sin(this.angle);
 
     let distanceFromEdges = 50;
+
     if (
-      random() < 0.0005 ||
       this.x < distanceFromEdges ||
       this.x > width - distanceFromEdges ||
       this.y < distanceFromEdges ||
       this.y > height - distanceFromEdges
     ) {
-      this.startRest();
+      this.angle = (this.angle + PI) % TWO_PI;
     }
 
     let d_angle = map(n, 0, 1, -0.02, 0.02);
