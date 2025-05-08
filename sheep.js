@@ -131,15 +131,15 @@ class Sheep {
 
     if (facingLeft) {
       if (this.isResting) {
-        image(this.sheep_left, this.x - 25, this.y - 25);
+        image(this.sheep_left, this.x - 25, this.y - 25, 70, 44);
       } else {
-        image(this.sheep_left_walk, this.x - 25, this.y - 25);
+        image(this.sheep_left_walk, this.x - 25, this.y - 25, 70, 44);
       }
     } else {
       if (this.isResting) {
-        image(this.sheep_right, this.x - 25, this.y - 25);
+        image(this.sheep_right, this.x - 25, this.y - 25, 70, 44);
       } else {
-        image(this.sheep_right_walk, this.x - 25, this.y - 25);
+        image(this.sheep_right_walk, this.x - 25, this.y - 25, 70, 44);
       }
     }
   }
