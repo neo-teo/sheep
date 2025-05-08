@@ -9,15 +9,15 @@ let blue_sheep_right_walk;
 let blue_sheep_right;
 
 function preload() {
-  red_sheep_left_walk = loadImage('/assets/red_walking_left.gif');
-  red_sheep_right_walk = loadImage('/assets/red_walking_right.gif');
-  red_sheep_left = loadImage('/assets/red_eating_left.gif');
-  red_sheep_right = loadImage('/assets/red_eating_right.gif');
+  red_sheep_left_walk = loadImage('/assets/red_walking_left_tiny.gif');
+  red_sheep_right_walk = loadImage('/assets/red_walking_right_tiny.gif');
+  red_sheep_left = loadImage('/assets/red_eating_left_tiny.gif');
+  red_sheep_right = loadImage('/assets/red_eating_right_tiny.gif');
 
-  blue_sheep_left_walk = loadImage('/assets/blue_walking_left.gif');
-  blue_sheep_right_walk = loadImage('/assets/blue_walking_right.gif');
-  blue_sheep_left = loadImage('/assets/blue_eating_left.gif');
-  blue_sheep_right = loadImage('/assets/blue_eating_right.gif');
+  blue_sheep_left_walk = loadImage('/assets/blue_walking_left_tiny.gif');
+  blue_sheep_right_walk = loadImage('/assets/blue_walking_right_tiny.gif');
+  blue_sheep_left = loadImage('/assets/blue_eating_left_tiny.gif');
+  blue_sheep_right = loadImage('/assets/blue_eating_right_tiny.gif');
 }
 
 const wasdControls = {
