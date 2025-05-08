@@ -10,8 +10,22 @@ function preload() {
   sheep_right = loadImage('/assets/sheep_right_tiny.gif');
 }
 
+const wasdControls = {
+  w: 'UP',
+  s: 'DOWN',
+  a: 'LEFT',
+  d: 'RIGHT',
+};
+
+const arrowControls = {
+  ArrowUp: 'UP',
+  ArrowDown: 'DOWN',
+  ArrowLeft: 'LEFT',
+  ArrowRight: 'RIGHT',
+};
+
 class Sheep {
-  constructor({ x, y }) {
+  constructor({ x, y, controls }) {
     this.x = x;
     this.y = y;
 
@@ -25,6 +39,8 @@ class Sheep {
 
     this.isResting = false;
     this.restTimer = 0;
+
+    this.controls = controls === 'wasd' ? wasdControls : arrowControls;
   }
 
   addToScore(n) {
@@ -38,25 +54,44 @@ class Sheep {
       return;
     }
 
-    let n = noise(this.ni);
+    // if keydown velocity = 1 otherwise
 
-    this.x += this.velocity * Math.cos(this.angle);
-    this.y += this.velocity * Math.sin(this.angle);
+    let newX = this.x + this.velocity * Math.cos(this.angle);
+    let newY = this.y + this.velocity * Math.sin(this.angle);
 
     let distanceFromEdges = 50;
 
     if (
-      this.x < distanceFromEdges ||
-      this.x > width - distanceFromEdges ||
-      this.y < distanceFromEdges ||
-      this.y > height - distanceFromEdges
+      newX < distanceFromEdges ||
+      newX > width - distanceFromEdges ||
+      newY < distanceFromEdges ||
+      newY > height - distanceFromEdges
     ) {
-      this.angle = (this.angle + PI) % TWO_PI;
+      return;
     }
 
-    let d_angle = map(n, 0, 1, -0.02, 0.02);
-    this.angle = (this.angle + d_angle) % TWO_PI;
-    this.ni += 0.01;
+    this.x = newX;
+    this.y = newY;
+  }
+
+  setDirectionFromKey(k) {
+    const direction = this.controls[k];
+    if (!direction || this.isResting) return;
+
+    switch (direction) {
+      case 'UP':
+        this.angle = -PI / 2;
+        break;
+      case 'DOWN':
+        this.angle = PI / 2;
+        break;
+      case 'LEFT':
+        this.angle = PI;
+        break;
+      case 'RIGHT':
+        this.angle = 0;
+        break;
+    }
   }
 
   draw() {

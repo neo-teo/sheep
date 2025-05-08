@@ -19,8 +19,12 @@ function setup() {
   textSize(18);
   textFont('Courier New');
 
-  sheepOne = new Sheep({ x: width / 3, y: height / 2 });
-  sheepTwo = new Sheep({ x: (2 * width) / 3, y: height / 2 });
+  sheepOne = new Sheep({ x: width / 3, y: height / 2, controls: 'wasd' });
+  sheepTwo = new Sheep({
+    x: (2 * width) / 3,
+    y: height / 2,
+    controls: 'arrows',
+  });
 
   for (let i = 0; i < 20; i++) {
     flowers.push(new Flower(random(width), random(height)));
@@ -72,7 +76,7 @@ function draw() {
 
     flowerTimer++;
 
-    if (flowerTimer > 100) {
+    if (flowerTimer > 500) {
       flowers.push(new Flower(random(width), random(height)));
       flowerTimer = 0;
     }
@@ -148,4 +152,9 @@ function draw() {
   text(60 - gameSeconds, width / 2, 50);
 
   pop();
+}
+
+function keyPressed() {
+  sheepOne.setDirectionFromKey(key);
+  sheepTwo.setDirectionFromKey(key);
 }
