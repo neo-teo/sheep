@@ -1,8 +1,10 @@
+let red_head;
 let red_sheep_left_walk;
 let red_sheep_left;
 let red_sheep_right_walk;
 let red_sheep_right;
 
+let blue_head;
 let blue_sheep_left_walk;
 let blue_sheep_left;
 let blue_sheep_right_walk;
@@ -18,6 +20,9 @@ function preload() {
   blue_sheep_right_walk = loadImage('/assets/blue_walking_right_tiny.gif');
   blue_sheep_left = loadImage('/assets/blue_eating_left_tiny.gif');
   blue_sheep_right = loadImage('/assets/blue_eating_right_tiny.gif');
+
+  red_head = loadImage('/assets/red_head.png');
+  blue_head = loadImage('/assets/blue_head.png');
 }
 
 const wasdControls = {
@@ -51,13 +56,16 @@ class Sheep {
     this.restTimer = 0;
 
     this.controls = controls === 'wasd' ? wasdControls : arrowControls;
-    this.color = color
     if (color === 'red') {
+      this.head = red_head;
+
       this.sheep_left = red_sheep_left;
       this.sheep_left_walk = red_sheep_left_walk;
       this.sheep_right = red_sheep_right;
       this.sheep_right_walk = red_sheep_right_walk;
     } else {
+      this.head = blue_head;
+
       this.sheep_left = blue_sheep_left;
       this.sheep_left_walk = blue_sheep_left_walk;
       this.sheep_right = blue_sheep_right;
@@ -145,5 +153,9 @@ class Sheep {
     this.isResting = false;
     this.restTimer = 0;
     this.angle = (this.angle + PI) % TWO_PI;
+  }
+
+  headImg() {
+    return this.head;
   }
 }

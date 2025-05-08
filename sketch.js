@@ -16,14 +16,21 @@ function setup() {
   createCanvas(innerWidth, innerHeight);
 
   noStroke();
+  noSmooth();
   textSize(18);
   textFont('Courier New');
 
-  sheepOne = new Sheep({ x: width / 3, y: height / 2, controls: 'wasd' });
+  sheepOne = new Sheep({
+    x: width / 3,
+    y: height / 2,
+    controls: 'wasd',
+    color: 'red',
+  });
   sheepTwo = new Sheep({
     x: (2 * width) / 3,
     y: height / 2,
     controls: 'arrows',
+    color: 'blue',
   });
 
   for (let i = 0; i < 20; i++) {
@@ -44,7 +51,7 @@ function draw() {
     gameSeconds++;
   }
 
-  if (gameSeconds >= 60) {
+  if (gameSeconds >= 0) {
     gameOver = true;
   }
 
@@ -93,7 +100,9 @@ function draw() {
     textSize(50);
     fill('white');
     ellipse(50, height / 2 - 5, 50, 50);
+    image(sheepOne.headImg(), 25, height / 2 - 30, 50, 30);
     ellipse(width - 50, height / 2 - 5, 50, 50);
+    image(sheepTwo.headImg(), width - 75, height / 2 - 30, 50, 30);
 
     fill('white');
     textAlign(LEFT, CENTER);
@@ -139,7 +148,9 @@ function draw() {
   textSize(50);
   fill('white');
   ellipse(50, 45, 50, 50);
+  image(sheepOne.headImg(), 25, 20, 50, 30);
   ellipse(width - 50, 45, 50, 50);
+  image(sheepTwo.headImg(), width - 75, 20, 50, 30);
 
   fill('black');
   textAlign(LEFT, CENTER);
