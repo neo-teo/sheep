@@ -11,9 +11,11 @@ function preload() {
 }
 
 class Sheep {
-  constructor(x, y) {
+  constructor({ x, y }) {
     this.x = x;
     this.y = y;
+
+    this.score = 0;
 
     // noise indices
     this.velocity = 1;
@@ -23,6 +25,10 @@ class Sheep {
 
     this.isResting = false;
     this.restTimer = 0;
+  }
+
+  addToScore(n) {
+    this.score += n;
   }
 
   update() {
