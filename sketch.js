@@ -51,7 +51,7 @@ function draw() {
     gameSeconds++;
   }
 
-  if (gameSeconds >= 0) {
+  if (gameSeconds >= 60) {
     gameOver = true;
   }
 
