@@ -1,13 +1,23 @@
-let sheep_left_walk;
-let sheep_left;
-let sheep_right_walk;
-let sheep_right;
+let red_sheep_left_walk;
+let red_sheep_left;
+let red_sheep_right_walk;
+let red_sheep_right;
+
+let blue_sheep_left_walk;
+let blue_sheep_left;
+let blue_sheep_right_walk;
+let blue_sheep_right;
 
 function preload() {
-  sheep_left_walk = loadImage('/assets/sheep_left_walk_tiny.gif');
-  sheep_left = loadImage('/assets/sheep_left_tiny.gif');
-  sheep_right_walk = loadImage('/assets/sheep_right_walk_tiny.gif');
-  sheep_right = loadImage('/assets/sheep_right_tiny.gif');
+  red_sheep_left_walk = loadImage('/assets/red_walking_left.gif');
+  red_sheep_right_walk = loadImage('/assets/red_walking_right.gif');
+  red_sheep_left = loadImage('/assets/red_eating_left.gif');
+  red_sheep_right = loadImage('/assets/red_eating_right.gif');
+
+  blue_sheep_left_walk = loadImage('/assets/blue_walking_left.gif');
+  blue_sheep_right_walk = loadImage('/assets/blue_walking_right.gif');
+  blue_sheep_left = loadImage('/assets/blue_eating_left.gif');
+  blue_sheep_right = loadImage('/assets/blue_eating_right.gif');
 }
 
 const wasdControls = {
@@ -25,7 +35,7 @@ const arrowControls = {
 };
 
 class Sheep {
-  constructor({ x, y, controls }) {
+  constructor({ x, y, controls, color }) {
     this.x = x;
     this.y = y;
 
@@ -41,6 +51,18 @@ class Sheep {
     this.restTimer = 0;
 
     this.controls = controls === 'wasd' ? wasdControls : arrowControls;
+    this.color = color
+    if (color === 'red') {
+      this.sheep_left = red_sheep_left;
+      this.sheep_left_walk = red_sheep_left_walk;
+      this.sheep_right = red_sheep_right;
+      this.sheep_right_walk = red_sheep_right_walk;
+    } else {
+      this.sheep_left = blue_sheep_left;
+      this.sheep_left_walk = blue_sheep_left_walk;
+      this.sheep_right = blue_sheep_right;
+      this.sheep_right_walk = blue_sheep_right_walk;
+    }
   }
 
   addToScore(n) {
@@ -101,15 +123,15 @@ class Sheep {
 
     if (facingLeft) {
       if (this.isResting) {
-        image(sheep_left, this.x - 25, this.y - 25);
+        image(this.sheep_left, this.x - 25, this.y - 25);
       } else {
-        image(sheep_left_walk, this.x - 25, this.y - 25);
+        image(this.sheep_left_walk, this.x - 25, this.y - 25);
       }
     } else {
       if (this.isResting) {
-        image(sheep_right, this.x - 25, this.y - 25);
+        image(this.sheep_right, this.x - 25, this.y - 25);
       } else {
-        image(sheep_right_walk, this.x - 25, this.y - 25);
+        image(this.sheep_right_walk, this.x - 25, this.y - 25);
       }
     }
   }
