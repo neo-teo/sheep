@@ -1,5 +1,4 @@
-let sheepOne;
-let sheepTwo;
+let sheep;
 
 let flowers = [];
 let grasses = [];
@@ -14,8 +13,7 @@ function setup() {
   textFont('Courier New');
   text;
 
-  sheepOne = new Sheep(width / 3, height / 2);
-  sheepTwo = new Sheep((2 * width) / 3, height / 2);
+  sheep = new Sheep(width / 2, height / 2);
 
   for (let i = 0; i < 20; i++) {
     flowers.push(new Flower(random(width), random(height)));
@@ -27,7 +25,7 @@ function setup() {
 }
 
 function draw() {
-  for (let s of [sheepOne, sheepTwo]) {
+  for (let s of [sheep]) {
     s.update();
 
     for (let i = flowers.length - 1; i >= 0; i--) {
@@ -60,7 +58,7 @@ function draw() {
     g.draw();
   }
 
-  for (let s of [sheepOne, sheepTwo]) {
+  for (let s of [sheep]) {
     s.draw();
   }
 
