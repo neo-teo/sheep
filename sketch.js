@@ -2,7 +2,7 @@ let sheepOne;
 let sheepTwo;
 
 let flowers = [];
-let bushes = [];
+let grasses = [];
 
 let timer = 0;
 
@@ -21,8 +21,8 @@ function setup() {
     flowers.push(new Flower(random(width), random(height)));
   }
 
-  for (let i = 0; i < 10; i++) {
-    bushes.push({ x: random(width), y: random(height) });
+  for (let i = 0; i < 30; i++) {
+    grasses.push(new Grass(random(width), random(height)));
   }
 }
 
@@ -49,18 +49,15 @@ function draw() {
 
   timer++;
 
-  if (timer > 100) {
+  if (timer > 300) {
     flowers.push(new Flower(random(width), random(height)));
     timer = 0;
   }
 
   background('#83F28F');
 
-  for (let b of bushes) {
-    push();
-    fill('darkgreen');
-    text('\\|/', b.x, b.y);
-    pop();
+  for (let g of grasses) {
+    g.draw();
   }
 
   for (let s of [sheepOne, sheepTwo]) {
